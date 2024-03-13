@@ -8,7 +8,7 @@ plugins {
     kotlin("plugin.jpa") version PluginVersions.PLUGIN_JPA_VERSION
 }
 
-group = "com.example"
+group = "juyeong"
 version = "0.0.1-SNAPSHOT"
 
 java {
