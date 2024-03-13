@@ -30,7 +30,6 @@ dependencies {
     implementation(Dependencies.JWT)
     runtimeOnly(Dependencies.MYSQL)
     implementation(Dependencies.REDIS)
-    implementation(Dependencies.CLOUD_AWS)
     annotationProcessor(Dependencies.CONFIGURATION_PROCESSOR)
 }
 
