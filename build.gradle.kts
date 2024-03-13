@@ -19,9 +19,18 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation(Dependencies.JPA)
+    implementation(Dependencies.SECURITY)
+    implementation(Dependencies.VALIDATION)
+    implementation(Dependencies.WEB)
+    implementation(Dependencies.JACKSON)
+    implementation(Dependencies.REFLECT)
+    implementation(Dependencies.JDK8)
+    implementation(Dependencies.JWT)
+    runtimeOnly(Dependencies.MYSQL)
+    implementation(Dependencies.REDIS)
+    implementation(Dependencies.CLOUD_AWS)
+    annotationProcessor(Dependencies.CONFIGURATION_PROCESSOR)
 }
 
 tasks.withType<KotlinCompile> {
@@ -33,4 +42,21 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+allOpen {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
+}
+
+tasks.getByName<Jar>("jar") {
+    enabled = false
+}
+
+configurations {
+    create("myConfiguration") {
+        isCanBeResolved = true
+        isCanBeConsumed = false
+    }
 }
