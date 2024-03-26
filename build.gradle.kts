@@ -30,6 +30,7 @@ dependencies {
     implementation(Dependencies.JWT)
     runtimeOnly(Dependencies.MYSQL)
     implementation(Dependencies.REDIS)
+    implementation(Dependencies.OAUTH2)
     annotationProcessor(Dependencies.CONFIGURATION_PROCESSOR)
 }
 
