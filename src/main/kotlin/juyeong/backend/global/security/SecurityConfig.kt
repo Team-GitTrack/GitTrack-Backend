@@ -28,7 +28,6 @@ class SecurityConfig(
             .sessionManagement()
             .sessionCreationPolicy(STATELESS)
             .and().oauth2Login()
-            .loginPage("/login")
 
             .and()
             .authorizeHttpRequests()
