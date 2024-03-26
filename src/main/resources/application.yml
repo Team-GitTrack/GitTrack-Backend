@@ -30,6 +30,14 @@ spring:
     multipart:
       max-file-size: 10MB
 
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+
 jwt:
   secret_key: ${JWT_SECRET_KEY}
   access_exp: ${JWT_ACCESS_EXP:7200}
