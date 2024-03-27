@@ -37,7 +37,4 @@ class SecurityConfig(
             .and().apply(FilterConfig(objectMapper))
             .and().build()
     }
-
-    @Bean
-    fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 }
