@@ -11,4 +11,5 @@ object Dependencies {
     const val REDIS = "org.springframework.boot:spring-boot-starter-data-redis"
     const val CONFIGURATION_PROCESSOR = "org.springframework.boot:spring-boot-configuration-processor"
     const val OAUTH2 = "org.springframework.boot:spring-boot-starter-oauth2-client"
+    const val OPENFEIGN = "org.springframework.cloud:spring-cloud-starter-openfeign:${DependencyVersions.OPENFEIGN}"
 }

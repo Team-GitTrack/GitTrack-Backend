@@ -31,6 +31,7 @@ dependencies {
     runtimeOnly(Dependencies.MYSQL)
     implementation(Dependencies.REDIS)
     implementation(Dependencies.OAUTH2)
+    implementation(Dependencies.OPENFEIGN)
     annotationProcessor(Dependencies.CONFIGURATION_PROCESSOR)
 }
 
