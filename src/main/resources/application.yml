@@ -36,6 +36,7 @@ spring:
           github:
             client-id: ${GITHUB_CLIENT_ID}
             client-secret: ${GITHUB_CLIENT_SECRET}
+            redirect-uri: ${GITHUB_REDIRECT_URI}
 
 jwt:
   secret_key: ${JWT_SECRET_KEY:lshdfogwofhowehfoihwoifhsilhflsdhflhdflkfdjsl}
