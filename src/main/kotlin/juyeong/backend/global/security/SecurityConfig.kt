@@ -44,11 +44,3 @@ class SecurityConfig(
             .and().build()
     }
 }
-
-@Component
-class CustomAuthenticationEntryPoint : ServerAuthenticationEntryPoint {
-    override fun commence(exchange: ServerWebExchange, ex: AuthenticationException): Mono<Void> {
-        exchange.response.statusCode = HttpStatus.UNAUTHORIZED
-        return exchange.response.setComplete()
-    }
-}
