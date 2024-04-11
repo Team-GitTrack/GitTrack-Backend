@@ -6,10 +6,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class RequestConfig {
+class GithubRequestConfig {
     @Bean
     fun requestInterceptor(): RequestInterceptor {
         return RequestInterceptor { template: RequestTemplate ->
-            template.header("Accept", "application/json")}
+            template.header("Accept", "application/json")
+        }
     }
 }

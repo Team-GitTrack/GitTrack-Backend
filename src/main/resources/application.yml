@@ -20,6 +20,7 @@ spring:
     host: ${REDIS_HOST:localhost}
 
   jackson:
+    property-naming-strategy: SNAKE_CASE
     serialization:
       fail-on-empty-beans: false
 

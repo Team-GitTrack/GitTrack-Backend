@@ -1,5 +1,6 @@
 package juyeong.backend.domain.github.presentation
 
+import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.service.GithubService
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,4 +15,7 @@ class GithubController(
 ) {
     @GetMapping("/token/{code}")
     fun getAccessToken(@PathVariable("code") code: String): TokenResponse = githubService.getAccessToken(code)
+
+    @GetMapping("/user/{token}")
+    fun getUserInfo(@PathVariable("token") token: String): GithubUserInfoResponse = githubService.getUserInfo(token)
 }
