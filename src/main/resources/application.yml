@@ -1,24 +1,4 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${MYSQL_URL}
-    username: ${MYSQL_USERNAME}
-    password: ${MYSQL_PASSWORD}
-
-  jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    hibernate:
-      ddl-auto: validate
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
-
-  redis:
-    port: ${REDIS_PORT:6379}
-    host: ${REDIS_HOST:localhost}
-
   jackson:
     property-naming-strategy: SNAKE_CASE
     serialization:
@@ -26,9 +6,6 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
-  servlet:
-    multipart:
-      max-file-size: 10MB
 
   security:
     oauth2:
@@ -38,10 +15,3 @@ spring:
             client-id: ${GITHUB_CLIENT_ID}
             client-secret: ${GITHUB_CLIENT_SECRET}
             redirect-uri: ${GITHUB_REDIRECT_URI}
-
-jwt:
-  secret_key: ${JWT_SECRET_KEY:lshdfogwofhowehfoihwoifhsilhflsdhflhdflkfdjsl}
-  access_exp: ${JWT_ACCESS_EXP:7200}
-  refresh_exp: ${JWT_REFRESH_EXP:86400}
-  header: ${JWT_HEADER:Authorization}
-  prefix: ${JWT_PREFIX:Bearer}
