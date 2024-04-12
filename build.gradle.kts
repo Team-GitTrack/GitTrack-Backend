@@ -20,7 +20,6 @@ repositories {
 }
 
 dependencies {
-    implementation(Dependencies.JPA)
     implementation(Dependencies.SECURITY)
     implementation(Dependencies.VALIDATION)
     implementation(Dependencies.WEB)
