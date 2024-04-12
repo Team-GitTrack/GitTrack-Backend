@@ -5,7 +5,6 @@ plugins {
     id("io.spring.dependency-management") version PluginVersions.SPRING_DEPENDENCY_MANAGEMENT_VERSION
     kotlin("jvm") version PluginVersions.JVM_VERSION
     kotlin("plugin.spring") version PluginVersions.PLUGIN_SPRING_VERSION
-    kotlin("plugin.jpa") version PluginVersions.PLUGIN_JPA_VERSION
 }
 
 group = "juyeong"

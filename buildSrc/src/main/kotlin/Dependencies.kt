@@ -1,5 +1,4 @@
 object Dependencies {
-    const val JPA = "org.springframework.boot:spring-boot-starter-data-jpa"
     const val SECURITY = "org.springframework.boot:spring-boot-starter-security"
     const val VALIDATION = "org.springframework.boot:spring-boot-starter-validation"
     const val WEB = "org.springframework.boot:spring-boot-starter-web"
