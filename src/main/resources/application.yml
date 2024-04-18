@@ -18,3 +18,4 @@ spring:
             scope:
               - user
               - repo
+              - members

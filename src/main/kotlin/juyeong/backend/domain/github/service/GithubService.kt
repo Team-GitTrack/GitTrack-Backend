@@ -1,6 +1,8 @@
 package juyeong.backend.domain.github.service
 
+import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
+import juyeong.backend.domain.github.presentation.dto.OrganizationListElement
 import juyeong.backend.global.util.openfeign.client.GithubFeign
 import juyeong.backend.global.util.openfeign.client.GithubTokenFeign
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
@@ -19,4 +21,18 @@ class GithubService(
     fun getAccessToken(code: String): TokenResponse = githubTokenFeign.getAccessToken(clientId, clientSecret, code)
 
     fun getUserInfo(token: String): GithubUserInfoResponse = githubFeign.getUserInfo(token)
+
+    fun getOrganizationList(token: String): GetOrganizationListResponse {
+        val organizations = githubFeign.getUserOrganizationList(token)
+
+        return GetOrganizationListResponse(
+            organizations.map {
+                OrganizationListElement(
+                    it.login,
+                    it.avatarUrl,
+                    it.description ?: ""
+                )
+            }
+        )
+    }
 }

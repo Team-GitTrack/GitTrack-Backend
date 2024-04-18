@@ -1,5 +1,6 @@
 package juyeong.backend.domain.github.presentation
 
+import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.service.GithubService
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
@@ -19,4 +20,7 @@ class GithubController(
 
     @GetMapping("/user")
     fun getUserInfo(@RequestHeader("Authorization") token: String): GithubUserInfoResponse = githubService.getUserInfo(token)
+
+    @GetMapping("/organizations")
+    fun getOrganizationList(@RequestHeader("Authorization") token: String): GetOrganizationListResponse = githubService.getOrganizationList(token)
 }
