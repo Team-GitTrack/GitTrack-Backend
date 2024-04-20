@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RequestMapping("/github")
@@ -23,4 +24,7 @@ class GithubController(
 
     @GetMapping("/organizations")
     fun getOrganizationList(@RequestHeader("Authorization") token: String): GetOrganizationListResponse = githubService.getOrganizationList(token)
+
+    @GetMapping("/issues")
+    fun getIssuesList(@RequestHeader("Authorization") token: String, @RequestParam filter: String) = githubService.getIssueList(token, filter)
 }

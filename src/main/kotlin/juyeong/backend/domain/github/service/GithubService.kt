@@ -1,8 +1,10 @@
 package juyeong.backend.domain.github.service
 
+import juyeong.backend.domain.github.presentation.dto.GetIssueListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
-import juyeong.backend.domain.github.presentation.dto.OrganizationListElement
+import juyeong.backend.domain.github.presentation.dto.IssueElement
+import juyeong.backend.domain.github.presentation.dto.OrganizationElement
 import juyeong.backend.global.util.openfeign.client.GithubFeign
 import juyeong.backend.global.util.openfeign.client.GithubTokenFeign
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
@@ -27,10 +29,21 @@ class GithubService(
 
         return GetOrganizationListResponse(
             organizations.map {
-                OrganizationListElement(
+                OrganizationElement(
                     it.login,
                     it.avatarUrl,
                     it.description ?: ""
+                )
+            }
+        )
+    }
+
+    fun getIssueList(token: String, filter: String): GetIssueListResponse {
+        val issues = githubFeign.getIssueList(token, filter, "all")
+        return GetIssueListResponse(
+            issues.map {
+                IssueElement(
+                    it.repository.fullName, it.title, it.number
                 )
             }
         )

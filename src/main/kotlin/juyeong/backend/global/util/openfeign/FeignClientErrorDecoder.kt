@@ -12,6 +12,7 @@ import juyeong.backend.global.util.openfeign.client.exception.FeignUnAuthorizedE
 class FeignClientErrorDecoder : ErrorDecoder {
     override fun decode(methodKey: String, response: Response): Exception {
         if (response.status() >= 400) {
+            println(response.reason())
             when (response.status()) {
                 400 -> throw FeignBadRequestException
                 401 -> throw FeignUnAuthorizedException
