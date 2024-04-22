@@ -7,6 +7,7 @@ import juyeong.backend.domain.github.presentation.dto.IssueElement
 import juyeong.backend.domain.github.presentation.dto.OrganizationElement
 import juyeong.backend.global.util.openfeign.client.GithubFeign
 import juyeong.backend.global.util.openfeign.client.GithubTokenFeign
+import juyeong.backend.global.util.openfeign.client.dto.GetOrganizationResponse
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -48,4 +49,6 @@ class GithubService(
             }
         )
     }
+
+    fun getOrganization(org: String): GetOrganizationResponse = githubFeign.getOrganization(org)
 }

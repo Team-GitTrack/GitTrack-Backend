@@ -3,6 +3,7 @@ package juyeong.backend.domain.github.presentation
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.service.GithubService
+import juyeong.backend.global.util.openfeign.client.dto.GetOrganizationResponse
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -27,4 +28,7 @@ class GithubController(
 
     @GetMapping("/issues")
     fun getIssuesList(@RequestHeader("Authorization") token: String, @RequestParam filter: String) = githubService.getIssueList(token, filter)
+
+    @GetMapping("/{organization}")
+    fun getOrganization(@PathVariable organization: String): GetOrganizationResponse = githubService.getOrganization(organization)
 }
