@@ -24,7 +24,4 @@ interface GithubFeign {
         @RequestParam("filter") filter: String,
         @RequestParam("state") state: String
     ): List<GetIssuesResponse>
-
-    @GetMapping("/orgs/{org}")
-    fun getOrganization(@PathVariable org: String): GetOrganizationResponse
 }

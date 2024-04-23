@@ -28,7 +28,4 @@ class GithubController(
 
     @GetMapping("/issues")
     fun getIssuesList(@RequestHeader("Authorization") token: String, @RequestParam filter: String) = githubService.getIssueList(token, filter)
-
-    @GetMapping("/{organization}")
-    fun getOrganization(@PathVariable organization: String): GetOrganizationResponse = githubService.getOrganization(organization)
 }

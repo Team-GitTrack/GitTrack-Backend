@@ -49,6 +49,4 @@ class GithubService(
             }
         )
     }
-
-    fun getOrganization(org: String): GetOrganizationResponse = githubFeign.getOrganization(org)
 }
