@@ -2,6 +2,7 @@ package juyeong.backend.global.util.openfeign.client
 
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetIssuesResponse
+import juyeong.backend.global.util.openfeign.client.dto.GetOrganizationReposResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetOrganizationResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetUserOrganizationsResponse
 import org.springframework.cloud.openfeign.FeignClient
@@ -27,4 +28,7 @@ interface GithubFeign {
 
     @GetMapping("/orgs/{org}/members")
     fun getOrganizationMembers(@RequestHeader("Authorization") authorization: String, @PathVariable org: String): List<GithubUserInfoResponse>
+
+    @GetMapping("/orgs/{org}/repos")
+    fun getOrganizationRepos(@RequestHeader("Authorization") authorization: String, @PathVariable org: String): List<GetOrganizationReposResponse>
 }

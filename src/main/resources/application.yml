@@ -19,3 +19,4 @@ spring:
               - user
               - repo
               - members
+              - metadata

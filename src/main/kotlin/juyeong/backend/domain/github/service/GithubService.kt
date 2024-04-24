@@ -3,13 +3,14 @@ package juyeong.backend.domain.github.service
 import juyeong.backend.domain.github.presentation.dto.GetIssueListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListResponse
+import juyeong.backend.domain.github.presentation.dto.GetOrganizationRepoListResponse
+import juyeong.backend.domain.github.presentation.dto.GetOrganizationReposElement
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.presentation.dto.IssueElement
 import juyeong.backend.domain.github.presentation.dto.OrganizationElement
 import juyeong.backend.domain.github.presentation.dto.OrganizationMemberElement
 import juyeong.backend.global.util.openfeign.client.GithubFeign
 import juyeong.backend.global.util.openfeign.client.GithubTokenFeign
-import juyeong.backend.global.util.openfeign.client.dto.GetOrganizationResponse
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -59,5 +60,16 @@ class GithubService(
                 OrganizationMemberElement(it.login, it.avatarUrl)
             }
         )
+    }
+
+    fun getOrganizationRepos(token: String, organization: String): GetOrganizationRepoListResponse {
+        val response = githubFeign.getOrganizationRepos(token, organization)
+        return GetOrganizationRepoListResponse(response.map {
+            GetOrganizationReposElement(
+                it.name,
+                it.description ?: "",
+                it.private
+            )
+        })
     }
 }
