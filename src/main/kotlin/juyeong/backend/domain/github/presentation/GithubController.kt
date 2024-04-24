@@ -1,9 +1,9 @@
 package juyeong.backend.domain.github.presentation
 
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
+import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.service.GithubService
-import juyeong.backend.global.util.openfeign.client.dto.GetOrganizationResponse
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -21,11 +21,20 @@ class GithubController(
     fun getAccessToken(@PathVariable("code") code: String): TokenResponse = githubService.getAccessToken(code)
 
     @GetMapping("/user")
-    fun getUserInfo(@RequestHeader("Authorization") token: String): GithubUserInfoResponse = githubService.getUserInfo(token)
+    fun getUserInfo(@RequestHeader("Authorization") token: String): GithubUserInfoResponse =
+        githubService.getUserInfo(token)
 
     @GetMapping("/organizations")
-    fun getOrganizationList(@RequestHeader("Authorization") token: String): GetOrganizationListResponse = githubService.getOrganizationList(token)
+    fun getOrganizationList(@RequestHeader("Authorization") token: String): GetOrganizationListResponse =
+        githubService.getOrganizationList(token)
 
     @GetMapping("/issues")
-    fun getIssuesList(@RequestHeader("Authorization") token: String, @RequestParam filter: String) = githubService.getIssueList(token, filter)
+    fun getIssuesList(@RequestHeader("Authorization") token: String, @RequestParam filter: String) =
+        githubService.getIssueList(token, filter)
+
+    @GetMapping("/{organization}/members")
+    fun getOrganizationMembers(
+        @RequestHeader("Authorization") token: String,
+        @PathVariable organization: String
+    ): GetOrganizationMemberListResponse = githubService.getOrganizationMembers(token, organization)
 }

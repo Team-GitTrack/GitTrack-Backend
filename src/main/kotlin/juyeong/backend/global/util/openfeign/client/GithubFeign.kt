@@ -24,4 +24,7 @@ interface GithubFeign {
         @RequestParam("filter") filter: String,
         @RequestParam("state") state: String
     ): List<GetIssuesResponse>
+
+    @GetMapping("/orgs/{org}/members")
+    fun getOrganizationMembers(@RequestHeader("Authorization") authorization: String, @PathVariable org: String): List<GithubUserInfoResponse>
 }

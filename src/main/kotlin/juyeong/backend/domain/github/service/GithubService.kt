@@ -2,9 +2,11 @@ package juyeong.backend.domain.github.service
 
 import juyeong.backend.domain.github.presentation.dto.GetIssueListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
+import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.presentation.dto.IssueElement
 import juyeong.backend.domain.github.presentation.dto.OrganizationElement
+import juyeong.backend.domain.github.presentation.dto.OrganizationMemberElement
 import juyeong.backend.global.util.openfeign.client.GithubFeign
 import juyeong.backend.global.util.openfeign.client.GithubTokenFeign
 import juyeong.backend.global.util.openfeign.client.dto.GetOrganizationResponse
@@ -46,6 +48,15 @@ class GithubService(
                 IssueElement(
                     it.repository.fullName, it.title, it.number
                 )
+            }
+        )
+    }
+
+    fun getOrganizationMembers(token: String, organization: String): GetOrganizationMemberListResponse {
+        val response = githubFeign.getOrganizationMembers(token, organization)
+        return GetOrganizationMemberListResponse(
+            response.map {
+                OrganizationMemberElement(it.login, it.avatarUrl)
             }
         )
     }
