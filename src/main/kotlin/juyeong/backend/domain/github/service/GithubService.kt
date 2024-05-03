@@ -5,10 +5,12 @@ import juyeong.backend.domain.github.presentation.dto.GetOrganizationListRespons
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationRepoListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationReposElement
+import juyeong.backend.domain.github.presentation.dto.GetRepoLanguageResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.presentation.dto.IssueElement
 import juyeong.backend.domain.github.presentation.dto.OrganizationElement
 import juyeong.backend.domain.github.presentation.dto.OrganizationMemberElement
+import juyeong.backend.domain.github.presentation.dto.RepoLanguageElement
 import juyeong.backend.global.util.openfeign.client.GithubFeign
 import juyeong.backend.global.util.openfeign.client.GithubTokenFeign
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
@@ -43,7 +45,7 @@ class GithubService(
     }
 
     fun getIssueList(token: String, filter: String): GetIssueListResponse {
-        val issues = githubFeign.getIssueList(token, filter, "all")
+        val issues = githubFeign.getIssueList(token, filter, "open")
         return GetIssueListResponse(
             issues.map {
                 IssueElement(
@@ -71,5 +73,16 @@ class GithubService(
                 it.private
             )
         })
+    }
+
+    fun getRepoLanguages(organization: String, repository: String): GetRepoLanguageResponse {
+        val response = githubFeign.getRepoLanguage(organization, repository)
+        return GetRepoLanguageResponse(response.map {
+            RepoLanguageElement(
+                it.key,
+                it.value
+            )
+        }
+        )
     }
 }

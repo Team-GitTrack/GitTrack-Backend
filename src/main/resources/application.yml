@@ -20,3 +20,4 @@ spring:
               - repo
               - members
               - metadata
+              - admin
