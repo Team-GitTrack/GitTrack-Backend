@@ -5,6 +5,7 @@ import juyeong.backend.domain.github.presentation.dto.GetOrganizationListRespons
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationRepoListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationReposElement
+import juyeong.backend.domain.github.presentation.dto.GetRepoContributorsResponse
 import juyeong.backend.domain.github.presentation.dto.GetRepoLanguageResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.presentation.dto.IssueElement
@@ -82,7 +83,8 @@ class GithubService(
                 it.key,
                 it.value
             )
-        }
-        )
+        })
     }
+
+    fun getRepoContributors(token: String, organization: String, repository: String): GetRepoContributorsResponse = GetRepoContributorsResponse(githubFeign.getContributors(token, organization, repository))
 }

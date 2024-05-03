@@ -3,6 +3,7 @@ package juyeong.backend.domain.github.presentation
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationRepoListResponse
+import juyeong.backend.domain.github.presentation.dto.GetRepoContributorsResponse
 import juyeong.backend.domain.github.presentation.dto.GetRepoLanguageResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.service.GithubService
@@ -36,17 +37,22 @@ class GithubController(
 
     @GetMapping("/{organization}/members")
     fun getOrganizationMembers(
-        @RequestHeader("Authorization") token: String,
-        @PathVariable organization: String
+        @RequestHeader("Authorization") token: String, @PathVariable organization: String
     ): GetOrganizationMemberListResponse = githubService.getOrganizationMembers(token, organization)
 
     @GetMapping("/{organization}/repos")
     fun getOrganizationRepos(
-        @RequestHeader("Authorization") token: String,
-        @PathVariable organization: String
+        @RequestHeader("Authorization") token: String, @PathVariable organization: String
     ): GetOrganizationRepoListResponse = githubService.getOrganizationRepos(token, organization)
 
     @GetMapping("/{organization}/{repository}/languages")
     fun getRepoLanguage(@PathVariable organization: String, @PathVariable repository: String): GetRepoLanguageResponse =
         githubService.getRepoLanguages(organization, repository)
+
+    @GetMapping("/{organization}/{repository}/contributors")
+    fun getRepoContributors(
+        @RequestHeader("Authorization") token: String,
+        @PathVariable organization: String,
+        @PathVariable repository: String
+    ): GetRepoContributorsResponse = githubService.getRepoContributors(token, organization, repository)
 }

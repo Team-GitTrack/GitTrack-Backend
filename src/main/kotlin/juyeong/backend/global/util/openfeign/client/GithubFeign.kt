@@ -1,6 +1,7 @@
 package juyeong.backend.global.util.openfeign.client
 
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
+import juyeong.backend.global.util.openfeign.client.dto.GetContributorResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetIssuesResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetOrganizationReposResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetUserOrganizationsResponse
@@ -33,4 +34,7 @@ interface GithubFeign {
 
     @GetMapping("/repos/{org}/{repo}/languages")
     fun getRepoLanguage(@PathVariable org: String, @PathVariable repo: String): Map<String, Int>
+
+    @GetMapping("/repos/{org}/{repo}/contributors")
+    fun getContributors(@RequestHeader("Authorization") authorization: String, @PathVariable org: String, @PathVariable repo: String): List<GetContributorResponse>
 }
