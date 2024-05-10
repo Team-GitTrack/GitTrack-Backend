@@ -1,4 +1,4 @@
-package juyeong.backend.domain.github.presentation.dto
+package juyeong.backend.domain.github.presentation.dto.element
 
 data class GetOrganizationReposElement(
     val name: String,
