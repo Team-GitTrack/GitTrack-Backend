@@ -27,14 +27,24 @@ interface GithubFeign {
     ): List<GetIssuesResponse>
 
     @GetMapping("/orgs/{org}/members")
-    fun getOrganizationMembers(@RequestHeader("Authorization") authorization: String, @PathVariable org: String): List<GithubUserInfoResponse>
+    fun getOrganizationMembers(
+        @RequestHeader("Authorization") authorization: String,
+        @PathVariable org: String
+    ): List<GithubUserInfoResponse>
 
     @GetMapping("/orgs/{org}/repos")
-    fun getOrganizationRepos(@RequestHeader("Authorization") authorization: String, @PathVariable org: String): List<GetOrganizationReposResponse>
+    fun getOrganizationRepos(
+        @RequestHeader("Authorization") authorization: String,
+        @PathVariable org: String
+    ): List<GetOrganizationReposResponse>
 
     @GetMapping("/repos/{org}/{repo}/languages")
     fun getRepoLanguage(@PathVariable org: String, @PathVariable repo: String): Map<String, Int>
 
     @GetMapping("/repos/{org}/{repo}/contributors")
-    fun getContributors(@RequestHeader("Authorization") authorization: String, @PathVariable org: String, @PathVariable repo: String): List<GetContributorResponse>
+    fun getContributors(
+        @RequestHeader("Authorization") authorization: String,
+        @PathVariable org: String,
+        @PathVariable repo: String
+    ): List<GetContributorResponse>
 }

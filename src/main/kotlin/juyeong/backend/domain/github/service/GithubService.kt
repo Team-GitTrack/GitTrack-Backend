@@ -86,5 +86,6 @@ class GithubService(
         })
     }
 
-    fun getRepoContributors(token: String, organization: String, repository: String): GetRepoContributorsResponse = GetRepoContributorsResponse(githubFeign.getContributors(token, organization, repository))
+    fun getRepoContributors(token: String, organization: String, repository: String): GetRepoContributorsResponse =
+        GetRepoContributorsResponse(githubFeign.getContributors(token, organization, repository))
 }
