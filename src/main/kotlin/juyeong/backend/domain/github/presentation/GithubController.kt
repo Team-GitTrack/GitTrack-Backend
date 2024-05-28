@@ -57,7 +57,7 @@ class GithubController(
         @PathVariable repository: String
     ): GetRepoContributorsResponse = githubService.getRepoContributors(token, organization, repository)
 
-    @GetMapping("/{org}/{repo}/commit")
+    @GetMapping("/{org}/{repo}/commits")
     fun getRepoCommit(
         @RequestHeader("Authorization") token: String,
         @PathVariable org: String,
