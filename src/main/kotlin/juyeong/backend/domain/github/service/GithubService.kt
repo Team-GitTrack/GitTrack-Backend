@@ -8,6 +8,8 @@ import juyeong.backend.domain.github.presentation.dto.element.GetOrganizationRep
 import juyeong.backend.domain.github.presentation.dto.GetRepoContributorsResponse
 import juyeong.backend.domain.github.presentation.dto.GetRepoLanguageResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
+import juyeong.backend.domain.github.presentation.dto.QueryCommitsResponse
+import juyeong.backend.domain.github.presentation.dto.element.CommitElement
 import juyeong.backend.domain.github.presentation.dto.element.IssueElement
 import juyeong.backend.domain.github.presentation.dto.element.OrganizationElement
 import juyeong.backend.domain.github.presentation.dto.element.OrganizationMemberElement
@@ -88,4 +90,17 @@ class GithubService(
 
     fun getRepoContributors(token: String, organization: String, repository: String): GetRepoContributorsResponse =
         GetRepoContributorsResponse(githubFeign.getContributors(token, organization, repository))
+
+
+    fun getRepoCommits(token: String, organization: String, repository: String): QueryCommitsResponse {
+        val list = githubFeign.getCommits(token, organization, repository)
+        return QueryCommitsResponse(
+             list.map {
+                 CommitElement(
+                     it.committer.login,
+                     it.commit.author.date.month.value
+                 )
+             }
+        )
+    }
 }

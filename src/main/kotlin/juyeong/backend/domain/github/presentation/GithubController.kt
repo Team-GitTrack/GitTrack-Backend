@@ -6,6 +6,7 @@ import juyeong.backend.domain.github.presentation.dto.GetOrganizationRepoListRes
 import juyeong.backend.domain.github.presentation.dto.GetRepoContributorsResponse
 import juyeong.backend.domain.github.presentation.dto.GetRepoLanguageResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
+import juyeong.backend.domain.github.presentation.dto.QueryCommitsResponse
 import juyeong.backend.domain.github.service.GithubService
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
 import org.springframework.web.bind.annotation.GetMapping
@@ -55,4 +56,11 @@ class GithubController(
         @PathVariable organization: String,
         @PathVariable repository: String
     ): GetRepoContributorsResponse = githubService.getRepoContributors(token, organization, repository)
+
+    @GetMapping("/{org}/{repo}/commit")
+    fun getRepoCommit(
+        @RequestHeader("Authorization") token: String,
+        @PathVariable org: String,
+        @PathVariable repo: String
+    ): QueryCommitsResponse = githubService.getRepoCommits(token, org, repo)
 }

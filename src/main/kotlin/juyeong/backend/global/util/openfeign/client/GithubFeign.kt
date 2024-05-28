@@ -1,6 +1,7 @@
 package juyeong.backend.global.util.openfeign.client
 
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
+import juyeong.backend.global.util.openfeign.client.dto.GetCommitsResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetContributorResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetIssuesResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetOrganizationReposResponse
@@ -47,4 +48,11 @@ interface GithubFeign {
         @PathVariable org: String,
         @PathVariable repo: String
     ): List<GetContributorResponse>
+
+    @GetMapping("/repos/{owner}/{repo}/commits")
+    fun getCommits(
+        @RequestHeader("Authorization") authorization: String,
+        @PathVariable owner: String,
+        @PathVariable repo: String
+    ): List<GetCommitsResponse>
 }
