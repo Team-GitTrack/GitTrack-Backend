@@ -3,12 +3,7 @@ package juyeong.backend.global.util.openfeign.client.dto
 import java.time.LocalDateTime
 
 data class GetCommitsResponse(
-    val committer: CommitterElement,
     val commit: CommitElement
-)
-
-data class CommitterElement(
-    val login: String,
 )
 
 data class CommitElement(
@@ -16,5 +11,6 @@ data class CommitElement(
 )
 
 data class AuthorElement(
+    val name: String,
     val date: LocalDateTime
 )
