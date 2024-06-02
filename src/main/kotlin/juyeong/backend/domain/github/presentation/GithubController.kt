@@ -62,5 +62,5 @@ class GithubController(
         @RequestHeader("Authorization") token: String,
         @PathVariable org: String,
         @PathVariable repo: String
-    ): QueryCommitsResponse = githubService.getRepoCommits(token, org, repo)
+    ) = githubService.getRepoCommits(token, org, repo)
 }

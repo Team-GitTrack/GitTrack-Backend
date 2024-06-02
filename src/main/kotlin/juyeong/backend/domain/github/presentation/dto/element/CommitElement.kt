@@ -1,6 +1,6 @@
 package juyeong.backend.domain.github.presentation.dto.element
 
 data class CommitElement(
-    val login: String,
+    var count: Int,
     val month: Int
 )

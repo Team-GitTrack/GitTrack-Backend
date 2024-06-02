@@ -1,5 +1,6 @@
 package juyeong.backend.domain.github.service
 
+import juyeong.backend.domain.github.presentation.dto.Commit
 import juyeong.backend.domain.github.presentation.dto.GetIssueListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListResponse
@@ -93,12 +94,20 @@ class GithubService(
 
 
     fun getRepoCommits(token: String, organization: String, repository: String): QueryCommitsResponse {
-        val list = githubFeign.getCommits(token, organization, repository)
+        val response = githubFeign.getCommits(token, organization, repository)
+        val list = response.groupBy {
+            it.commit.author.name
+        }.mapValues {
+            it.value.groupBy { it.commit.author.date.monthValue }
+                .map { CommitElement(it.value.size, month = it.key) }
+                .sortedBy { it.month }
+        }
+
         return QueryCommitsResponse(
             list.map {
-                CommitElement(
-                    it.commit.author.name,
-                    it.commit.author.date.month.value
+                Commit(
+                    it.key,
+                    it.value
                 )
             }
         )
