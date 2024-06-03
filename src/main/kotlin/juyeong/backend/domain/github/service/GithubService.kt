@@ -1,6 +1,5 @@
 package juyeong.backend.domain.github.service
 
-import juyeong.backend.domain.github.presentation.dto.Commit
 import juyeong.backend.domain.github.presentation.dto.GetIssueListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationListResponse
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListResponse
@@ -9,7 +8,7 @@ import juyeong.backend.domain.github.presentation.dto.GetRepoContributorsRespons
 import juyeong.backend.domain.github.presentation.dto.GetRepoLanguageResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.presentation.dto.QueryCommitsResponse
-import juyeong.backend.domain.github.presentation.dto.element.CommitElement
+import juyeong.backend.domain.github.presentation.dto.element.CommitCountElement
 import juyeong.backend.domain.github.presentation.dto.element.GetOrganizationReposElement
 import juyeong.backend.domain.github.presentation.dto.element.IssueElement
 import juyeong.backend.domain.github.presentation.dto.element.OrganizationElement
@@ -95,21 +94,16 @@ class GithubService(
 
     fun getRepoCommits(token: String, organization: String, repository: String): QueryCommitsResponse {
         val response = githubFeign.getCommits(token, organization, repository)
-        val list = response.groupBy {
-            it.commit.author.name
-        }.mapValues {
-            it.value.groupBy { it.commit.author.date.monthValue }
-                .map { CommitElement(it.value.size, month = it.key) }
-                .sortedBy { it.month }
+        val map = HashMap<String, HashMap<Int, Int>>()
+        response.forEach {
+            val login = it.commit.author.name
+            val month = it.commit.author.date.monthValue
+            map.getOrPut(login) { HashMap() }.merge(month, 1, Int::plus)
         }
-
-        return QueryCommitsResponse(
-            list.map {
-                Commit(
-                    it.key,
-                    it.value
-                )
+        return QueryCommitsResponse(map.flatMap {
+            it.value.map { (month, count) ->
+                CommitCountElement(it.key, month = month, value = count)
             }
-        )
+        })
     }
 }
