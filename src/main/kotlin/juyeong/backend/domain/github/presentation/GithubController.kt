@@ -6,7 +6,6 @@ import juyeong.backend.domain.github.presentation.dto.GetOrganizationRepoListRes
 import juyeong.backend.domain.github.presentation.dto.GetRepoContributorsResponse
 import juyeong.backend.domain.github.presentation.dto.GetRepoLanguageResponse
 import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
-import juyeong.backend.domain.github.presentation.dto.QueryCommitsResponse
 import juyeong.backend.domain.github.service.GithubService
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
 import org.springframework.web.bind.annotation.GetMapping

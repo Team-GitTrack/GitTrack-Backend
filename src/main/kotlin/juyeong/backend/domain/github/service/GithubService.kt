@@ -91,7 +91,6 @@ class GithubService(
     fun getRepoContributors(token: String, organization: String, repository: String): GetRepoContributorsResponse =
         GetRepoContributorsResponse(githubFeign.getContributors(token, organization, repository))
 
-
     fun getRepoCommits(token: String, organization: String, repository: String): QueryCommitsResponse {
         val response = githubFeign.getCommits(token, organization, repository)
         val map = HashMap<String, HashMap<Int, Int>>()
