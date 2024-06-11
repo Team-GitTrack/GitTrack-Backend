@@ -40,6 +40,7 @@ class GithubController(
         @RequestHeader("Authorization") token: String, @PathVariable organization: String
     ): GetOrganizationMemberListResponse = githubService.getOrganizationMembers(token, organization)
 
+    
     @GetMapping("/{organization}/repos")
     fun getOrganizationRepos(
         @RequestHeader("Authorization") token: String, @PathVariable organization: String
@@ -55,7 +56,6 @@ class GithubController(
         @PathVariable organization: String,
         @PathVariable repository: String
     ): GetRepoContributorsResponse = githubService.getRepoContributors(token, organization, repository)
-
     @GetMapping("/{org}/{repo}/commits")
     fun getRepoCommit(
         @RequestHeader("Authorization") token: String,
