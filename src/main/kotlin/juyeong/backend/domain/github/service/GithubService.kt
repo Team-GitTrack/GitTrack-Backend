@@ -48,7 +48,7 @@ class GithubService(
     }
 
     fun getIssueList(token: String, filter: String): GetIssueListResponse {
-        val issues = githubFeign.getIssueList(token, filter, "open")
+        val issues = githubFeign.getIssueList(token, filter, "all")
         return GetIssueListResponse(
             issues.map {
                 IssueElement(
