@@ -6,7 +6,8 @@ import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListR
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationRepoListResponse
 import juyeong.backend.domain.github.presentation.dto.GetRepoContributorsResponse
 import juyeong.backend.domain.github.presentation.dto.GetRepoLanguageResponse
-import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
+import juyeong.backend.domain.github.presentation.dto.GetUserInfoResponse
+import juyeong.backend.global.util.openfeign.client.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.presentation.dto.QueryCommitsResponse
 import juyeong.backend.domain.github.presentation.dto.element.CommitCountElement
 import juyeong.backend.domain.github.presentation.dto.element.GetOrganizationReposElement
@@ -31,7 +32,15 @@ class GithubService(
 ) {
     fun getAccessToken(code: String): TokenResponse = githubTokenFeign.getAccessToken(clientId, clientSecret, code)
 
-    fun getUserInfo(token: String): GithubUserInfoResponse = githubFeign.getUserInfo(token)
+    fun getUserInfo(token: String): GetUserInfoResponse {
+        val user = githubFeign.getUserInfo(token)
+        return GetUserInfoResponse(
+            user.login,
+            user.email ?: "Public Email을 설정해주세요.",
+            user.followers,
+            user.avatarUrl
+        )
+    }
 
     fun getOrganizationList(token: String): GetOrganizationListResponse {
         val organizations = githubFeign.getUserOrganizationList(token)

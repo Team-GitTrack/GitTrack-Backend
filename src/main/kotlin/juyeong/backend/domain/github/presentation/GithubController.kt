@@ -5,7 +5,8 @@ import juyeong.backend.domain.github.presentation.dto.GetOrganizationMemberListR
 import juyeong.backend.domain.github.presentation.dto.GetOrganizationRepoListResponse
 import juyeong.backend.domain.github.presentation.dto.GetRepoContributorsResponse
 import juyeong.backend.domain.github.presentation.dto.GetRepoLanguageResponse
-import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
+import juyeong.backend.domain.github.presentation.dto.GetUserInfoResponse
+import juyeong.backend.global.util.openfeign.client.dto.GithubUserInfoResponse
 import juyeong.backend.domain.github.service.GithubService
 import juyeong.backend.global.util.openfeign.client.dto.TokenResponse
 import org.springframework.web.bind.annotation.GetMapping
@@ -24,7 +25,7 @@ class GithubController(
     fun getAccessToken(@PathVariable("code") code: String): TokenResponse = githubService.getAccessToken(code)
 
     @GetMapping("/user")
-    fun getUserInfo(@RequestHeader("Authorization") token: String): GithubUserInfoResponse =
+    fun getUserInfo(@RequestHeader("Authorization") token: String): GetUserInfoResponse =
         githubService.getUserInfo(token)
 
     @GetMapping("/organizations")

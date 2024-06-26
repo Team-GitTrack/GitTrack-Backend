@@ -1,6 +1,6 @@
 package juyeong.backend.global.util.openfeign.client
 
-import juyeong.backend.domain.github.presentation.dto.GithubUserInfoResponse
+import juyeong.backend.global.util.openfeign.client.dto.GithubUserInfoResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetCommitsResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetContributorResponse
 import juyeong.backend.global.util.openfeign.client.dto.GetIssuesResponse
